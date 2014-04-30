@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Unofficial ArcGIS Server/Portal/PostgreSQL Checklist</title>
+
+	<link rel="stylesheet" href="//js.arcgis.com/3.9/js/esri/css/esri.css">
+	
+	<script>dojoConfig = {parseOnLoad: true}</script>
+	<script src='//js.arcgis.com/3.9/'></script>
+    
+    <style>    
+        body {
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
+    
+        .incomplete {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .complete {
+            color: green;
+        }
+    </style>
+	
+	<script>
+require(["dojo/parser", "dijit/form/CheckBox"]);
+
+function toggleCheckboxColor(checkbox) {
+    dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
+}
+	</script>
+</head>
+<body class="claro">
+    <h1>Gary's Unofficial ArcGIS Server/Portal/PostgreSQL Checklist</h1>
+    <table>
+        <tr>
+            <td><input id="ck0.25" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck0.25">Install ArcGIS for Desktop</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck0.5" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck0.5">Configure web server for SSL/HTTPS on port 443</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck1" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck1">Install ArcGIS for Server (after verifying system requirements)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck1.5" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck1.5">Create ArcGIS for Server site</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck1.7" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck1.7">Install root certificate on server and client(s) (if not using well known CA)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck1.6" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck1.6">Require SSL on ArcGIS for Server</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck1.75" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck1.75">Test sample map service on port 6443</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck2" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck2">Install Web Adaptor</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck3" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck3">Configure Web Adaptor for ArcGIS for Server (including SSL)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck4" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck4">Test sample map service through Web Adaptor (using HTTPS)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck5" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck5">Make three connections in ArcGIS for Desktop: admin, publisher, and user</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck6" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck6">Install PostgreSQL</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck7" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck7">Copy PostgreSQL server DLL to PostgreSQL</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck8" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck8">Copy PostgreSQL client DLLs to ArcGIS for Desktop and ArcGIS for Server</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck9" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck9">Create enterprise geodatabase</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck10" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck10">Register geodatabase as ArcGIS for Server's managed geodatabase</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck11" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck11">Install Portal for ArcGIS (after verifying system requirements)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck12" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck12">Define initial administrator account for Portal for ArcGIS</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck12.5" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck12.5">Configure Portal for ArcGIS settings</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck13" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck13">Configure Web Adaptor for Portal for ArcGIS (including SSL)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck14" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck14">Check Portal for ArcGIS through Web Adaptor (using HTTPS)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck15" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck15">Make ArcGIS for Server a federated, hosting server for Portal for ArcGIS</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck16" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck16">Publish a map from ArcMap as a hosted feature service</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck17" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck17">Create, save, and share a web map</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck18" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck18">Publish geoprocessing service (e.g. Position Analysis)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck19" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck19">Set up web application template (e.g. Position Analysis Web)</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck20" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck20">Install GeoEvent Processor</label></td>
+        </tr>
+        <tr>
+            <td><input id="ck21" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
+            <td><label class="incomplete" for="ck21">Configure GeoEvent Processor (e.g. go through tutorial)</label></td>
+        </tr>
+    </table>
+</body>
+</html>
