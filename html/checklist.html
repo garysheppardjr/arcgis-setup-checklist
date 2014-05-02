@@ -24,11 +24,16 @@
     </style>
 	
 	<script>
-require(["dojo/parser", "dijit/form/CheckBox"]);
+require(["dojo/parser", "dijit/form/CheckBox"], function() {
 
-function toggleCheckboxColor(checkbox) {
-    dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
-}
+    function toggleCheckboxColor(checkbox) {
+        dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
+    }
+    // Add the function to the window so it can be accessed from the DOM.
+    // This is cheating...should really use dojo/on.
+    window.toggleCheckboxColor = toggleCheckboxColor;
+    
+});
 	</script>
 </head>
 <body class="claro">
