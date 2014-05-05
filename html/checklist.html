@@ -24,7 +24,7 @@
     </style>
 	
 	<script>
-        require(["dojo/query", "dojo/dom-attr", "dojo/parser", "dijit/form/CheckBox", "dojo/domReady!"], function(query, domAttr) {
+        require(["dojo/query", "dojo/dom-attr", "dojo/dom", "dojo/parser", "dijit/form/CheckBox", "dojo/domReady!"], function(query, domAttr, dom) {
 
             function toggleCheckboxColor(checkbox) {
                 dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
@@ -45,12 +45,14 @@
                 for(var i = 0; i < localStorage.length; i++) {
                     var id = localStorage.key(i),
                         state = localStorage.getItem(localStorage.key(i));
-                    domAttr.set(id, "checked", state);
-                    if (state === "true") {
-                        domAttr.set(query("[for=" + id + "]")[0], "class", "complete");
-                    }
-                    else {
-                        domAttr.set(query("[for=" + id + "]")[0], "class", "incomplete");
+                    if (dom.byId(id)) {
+                        domAttr.set(id, "checked", state);
+                        if (state === "true") {
+                            domAttr.set(query("[for=" + id + "]")[0], "class", "complete");
+                        }
+                        else {
+                            domAttr.set(query("[for=" + id + "]")[0], "class", "incomplete");
+                        }
                     }
                 }
             }
