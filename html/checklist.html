@@ -24,11 +24,40 @@
     </style>
 	
 	<script>
-require(["dojo/parser", "dijit/form/CheckBox"]);
+        require(["dojo/query", "dojo/dom-attr", "dojo/parser", "dijit/form/CheckBox", "dojo/domReady!"], function(query, domAttr) {
 
-function toggleCheckboxColor(checkbox) {
-    dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
-}
+            function toggleCheckboxColor(checkbox) {
+                dojo.query("label[for=" + checkbox.id + "]")[0].className = (checkbox.checked ? "complete" : "incomplete");
+                storeState(checkbox.id, checkbox.checked);
+            }
+            // Add the function to the window so it can be accessed from the DOM.
+            // This is cheating...should really use dojo/on.
+            window.toggleCheckboxColor = toggleCheckboxColor;
+
+            function storeState(id, state) {
+                // Store the id and state of the checkbox in the browser's localStorage.
+                // localStorage persists across browser sessions.
+                localStorage.setItem(id, state);
+            }
+
+            function loadStates() {
+                // Update the checkboxes based on items in localStorage.
+                for(var i = 0; i < localStorage.length; i++) {
+                    var id = localStorage.key(i),
+                        state = localStorage.getItem(localStorage.key(i));
+                    domAttr.set(id, "checked", state);
+                    if (state === "true") {
+                        domAttr.set(query("[for=" + id + "]")[0], "class", "complete");
+                    }
+                    else {
+                        domAttr.set(query("[for=" + id + "]")[0], "class", "incomplete");
+                    }
+                }
+            }
+
+            loadStates();
+
+        });
 	</script>
 </head>
 <body class="claro">
@@ -39,7 +68,7 @@ function toggleCheckboxColor(checkbox) {
             <td><label class="incomplete" for="ck0.25">Install ArcGIS for Desktop</label></td>
         </tr>
         <tr>
-            <td><input id="ck0.5" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck0.5" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck0.5">Configure web server for SSL/HTTPS on port 443</label></td>
         </tr>
         <tr>
@@ -51,7 +80,7 @@ function toggleCheckboxColor(checkbox) {
             <td><label class="incomplete" for="ck1.5">Create ArcGIS for Server site</label></td>
         </tr>
         <tr>
-            <td><input id="ck1.7" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck1.7" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck1.7">Install root certificate on server and client(s) (if not using well known CA)</label></td>
         </tr>
         <tr>
@@ -79,7 +108,7 @@ function toggleCheckboxColor(checkbox) {
             <td><label class="incomplete" for="ck5">Make three connections in ArcGIS for Desktop: admin, publisher, and user</label></td>
         </tr>
         <tr>
-            <td><input id="ck6" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck6" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck6">Install PostgreSQL</label></td>
         </tr>
         <tr>
@@ -99,15 +128,15 @@ function toggleCheckboxColor(checkbox) {
             <td><label class="incomplete" for="ck10">Register geodatabase as ArcGIS for Server's managed geodatabase</label></td>
         </tr>
         <tr>
-            <td><input id="ck11" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck11" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck11">Install Portal for ArcGIS (after verifying system requirements)</label></td>
         </tr>
         <tr>
-            <td><input id="ck12" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck12" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck12">Define initial administrator account for Portal for ArcGIS</label></td>
         </tr>
         <tr>
-            <td><input id="ck12.5" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck12.5" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck12.5">Configure Portal for ArcGIS settings</label></td>
         </tr>
         <tr>
@@ -139,7 +168,7 @@ function toggleCheckboxColor(checkbox) {
             <td><label class="incomplete" for="ck19">Set up web application template (e.g. Position Analysis Web)</label></td>
         </tr>
         <tr>
-            <td><input id="ck20" data-dojo-type="dijit/form/CheckBox"  onChange="toggleCheckboxColor(this);" /></td>
+            <td><input id="ck20" data-dojo-type="dijit/form/CheckBox" onChange="toggleCheckboxColor(this);" /></td>
             <td><label class="incomplete" for="ck20">Install GeoEvent Processor</label></td>
         </tr>
         <tr>
