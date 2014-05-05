@@ -45,12 +45,14 @@
                 for(var i = 0; i < localStorage.length; i++) {
                     var id = localStorage.key(i),
                         state = localStorage.getItem(localStorage.key(i));
-                    domAttr.set(id, "checked", state);
-                    if (state === "true") {
-                        domAttr.set(query("[for=" + id + "]")[0], "class", "complete");
-                    }
-                    else {
-                        domAttr.set(query("[for=" + id + "]")[0], "class", "incomplete");
+                    if (domAttr.has(id, "id")) {
+                        domAttr.set(id, "checked", state);
+                        if (state === "true") {
+                            domAttr.set(query("[for=" + id + "]")[0], "class", "complete");
+                        }
+                        else {
+                            domAttr.set(query("[for=" + id + "]")[0], "class", "incomplete");
+                        }
                     }
                 }
             }
